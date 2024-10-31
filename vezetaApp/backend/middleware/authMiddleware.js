@@ -1,50 +1,35 @@
 const jwt = require('jsonwebtoken');
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('vezetaApp', 'root', 'root', {
   host: 'db',
-  dialect: 'mysql',
-  port: 3306
+  port: 3306,
+  dialect: 'mysql'
 });
 
-const User = sequelize.define('User', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-  },
-  phone: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  social_media: {
-    type: DataTypes.STRING
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
+const authMiddleware = async (req, res, next) => {
+  const token = req.header('Authorization').replace('Bearer ', '');
+
+  if (!token) {
+    return res.status(401).json({ error: 'Authentication token is missing.' });
   }
-}, {
-  tableName: 'users',
-  timestamps: false
-});
 
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  
-  if (token == null) return res.sendStatus(401);
-  
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
+  try {
+    const decoded = jwt.verify(token, 'your-secret-key');
+    const userId = decoded.id;
+
+    // Assuming User is a model and it's been properly defined elsewhere
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      throw new Error('User not found.');
+    }
+
     req.user = user;
     next();
-  });
+  } catch (error) {
+    res.status(401).json({ error: 'Invalid authentication token.' });
+  }
 };
 
-module.exports = { authenticateToken, User };
+module.exports = authMiddleware;
