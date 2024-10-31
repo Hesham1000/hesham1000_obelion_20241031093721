@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = new Sequelize('vezetaApp', 'root', 'root', {
   host: 'db',
   port: 3306,

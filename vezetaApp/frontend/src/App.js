@@ -1,10 +1,10 @@
 import React from 'react';
-import RegistrationForm from './components/RegistrationForm';
-import SearchProvider from './components/SearchProvider';
-import BookingAppointment from './components/BookingAppointment';
-import Payment from './components/Payment';
-import TransactionHistory from './components/TransactionHistory';
-import TwoFactorAuthentication from './components/TwoFactorAuthentication';
+import RegistrationForm from './components/RegistrationForm/RegistrationForm';
+import SearchProvider from './components/SearchProvider/SearchProvider';
+import BookingAppointment from './components/BookingAppointment/BookingAppointment';
+import Payment from './components/Payment/Payment';
+import TransactionHistory from './components/TransactionHistory/TransactionHistory';
+import TwoFactorAuthentication from './components/TwoFactorAuthentication/TwoFactorAuthentication';
 
 function App() {
   return (

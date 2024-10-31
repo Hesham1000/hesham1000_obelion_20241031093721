@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ProviderController = require('../controllers/ProviderController');
-const AppointmentController = require('../controllers/AppointmentController');
+const AppointmentController = require('../controllers/bookingController');
 
 router.get('/providers', async (req, res) => {
     try {

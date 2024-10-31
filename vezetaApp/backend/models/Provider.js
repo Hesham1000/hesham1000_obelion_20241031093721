@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../database/connection'); // Ensure to create this connection file with the specified credentials
+const sequelize = require('../database/config'); // Ensure to create this connection file with the specified credentials
 
 class Provider extends Model {
   static init(sequelize) {
