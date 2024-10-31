@@ -12,10 +12,10 @@
     "license": "ISC",
     "dependencies": {
         "sequelize": "6.6.5",
-        "express": "4.17.1"
+        "express": "latest"
     },
     "devDependencies": {
-        "sequelize": "6.6.5",
+        "sequelize": "6.12.0",
         "eslint": "7.32.0"
     }
 }
